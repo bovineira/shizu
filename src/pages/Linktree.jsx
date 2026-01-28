@@ -52,21 +52,41 @@ function Linktree() {
       />
 
       {/* Content Container */}
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-start px-4 py-12 pt-20">
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-start px-4 py-12 pt-16">
         
+        {/* Logo Redonda */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mb-8"
+        >
+          <img 
+            src="/linktree/logo shizu.jpg" 
+            alt="Shizü Logo" 
+            className="h-32 w-32 rounded-full object-cover ring-2 ring-gold/30 sm:h-40 sm:w-40"
+          />
+        </motion.div>
+
         {/* Título Shizü */}
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-12 text-center font-anton text-6xl font-black uppercase leading-none tracking-wider text-gold sm:text-7xl md:text-8xl"
-          style={{
-            textShadow: '0 0 20px rgba(255, 215, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.8)',
-            filter: 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.2))'
-          }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          className="mb-3 text-center text-3xl font-light tracking-wide text-white sm:text-4xl md:text-5xl"
         >
           Shizü
         </motion.h1>
+
+        {/* Subtítulo */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-12 text-center text-sm font-light leading-relaxed text-gray-300 sm:text-base"
+        >
+          A melhor experiência da culinária japonesa aqui em Salvador
+        </motion.p>
 
         {/* Container dos Links */}
         <div className="flex w-full max-w-md flex-col gap-4">
@@ -92,7 +112,7 @@ function Linktree() {
             </div>
             
             {/* Texto */}
-            <span className="flex-1 text-left font-bebas text-xl font-bold uppercase tracking-wide text-white sm:text-2xl">
+            <span className="flex-1 text-left text-lg font-normal text-white sm:text-xl">
               Fale Conosco!
             </span>
             
