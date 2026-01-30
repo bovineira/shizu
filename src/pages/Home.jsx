@@ -69,7 +69,7 @@ function Home() {
       {/* Content Container - FLEXBOX VERTICAL COM GAP */}
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-start gap-6 px-4 pt-20 pb-12">
         
-        {/* 1. HEADLINE - Oferta Inauguração */}
+        {/* 1. HEADLINE - Comunidade Shizü */}
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -80,9 +80,9 @@ function Home() {
             filter: 'drop-shadow(0 0 5px rgba(255, 0, 64, 0.3))'
           }}
         >
-          OFERTA
+          COMUNIDADE
           <br />
-          INAUGURAÇÃO
+          SHIZÜ
         </motion.h1>
 
         {/* 2. SUB-HEADLINE */}
@@ -105,13 +105,14 @@ function Home() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-4 w-full max-w-md px-4"
         >
-          <button
-            type="button"
+          <a
+            href="https://chat.whatsapp.com/Efw5485JVn4KDR3ZLj1EkR"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => {
-              // Facebook Pixel - Rastreio de clique no botão
               if (window.fbq) {
                 window.fbq('track', 'InitiateCheckout', {
-                  content_name: 'Oferta Inauguração - Comunidade Premium',
+                  content_name: 'Comunidade Shizü - WhatsApp',
                   value: 0,
                   currency: 'BRL'
                 });
@@ -126,7 +127,7 @@ function Home() {
           >
             <ShoppingBag className="h-7 w-7 transition-transform group-hover:scale-110 sm:h-9 sm:w-9" />
             ENTRAR NA COMUNIDADE
-          </button>
+          </a>
         </motion.div>
 
         {/* 5. FOOTER */}
