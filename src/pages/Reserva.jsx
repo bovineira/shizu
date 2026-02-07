@@ -1,0 +1,140 @@
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { MessageCircle } from 'lucide-react'
+
+function Reserva() {
+  const [shake, setShake] = useState(false)
+  const whatsappNumber = '5571983922495'
+  const whatsappUrl = `https://wa.me/${whatsappNumber}`
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShake(true)
+      setTimeout(() => setShake(false), 500)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    if (window.fbq) {
+      window.fbq('track', 'ViewContent', {
+        content_name: 'Reserva - Shizü',
+        content_category: 'Reserva',
+        value: 0,
+        currency: 'BRL'
+      })
+    }
+  }, [])
+
+  return (
+    <div className="relative min-h-screen w-full overflow-hidden bg-deep-black">
+      <div
+        className="absolute inset-0 z-0 bg-mobile-cover"
+        style={{
+          backgroundImage: `url('/images/background-sushi.webp')`,
+        }}
+      >
+        <div className="absolute inset-0 bg-black/20"></div>
+      </div>
+
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute left-10 top-20 z-0 h-32 w-32 rounded-full bg-neon-red/20 blur-3xl"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.3, 0.2],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+        className="absolute bottom-20 right-10 z-0 h-40 w-40 rounded-full bg-gold/20 blur-3xl"
+      />
+
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-start gap-6 px-4 pt-20 pb-12">
+        
+        <motion.h1
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center font-anton text-5xl font-black uppercase leading-none tracking-wider text-neon-red sm:text-6xl md:text-7xl"
+          style={{
+            textShadow: '0 0 15px rgba(255, 0, 64, 0.4), 0 2px 10px rgba(0, 0, 0, 0.8)',
+            filter: 'drop-shadow(0 0 5px rgba(255, 0, 64, 0.3))'
+          }}
+        >
+          FAÇA SUA
+          <br />
+          RESERVA
+        </motion.h1>
+
+        <motion.h2
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center font-bebas text-xl leading-tight tracking-wide text-white sm:text-2xl md:text-3xl max-w-2xl"
+          style={{
+            textShadow: '0 2px 10px rgba(0, 0, 0, 0.8)'
+          }}
+        >
+          Clique no botão abaixo e faça sua reserva pelo WhatsApp
+        </motion.h2>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-4 w-full max-w-md px-4"
+        >
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => {
+              if (window.fbq) {
+                window.fbq('track', 'InitiateCheckout', {
+                  content_name: 'Reserva Shizü - WhatsApp',
+                  value: 0,
+                  currency: 'BRL'
+                })
+              }
+            }}
+            className={`sheen-effect group relative flex w-full items-center justify-center gap-3 rounded-full px-8 py-5 font-bebas text-2xl font-bold uppercase tracking-wide text-white shadow-2xl transition-all duration-300 hover:scale-105 sm:py-6 sm:text-3xl md:text-4xl ${
+              shake ? 'animate-shake' : ''
+            }`}
+            style={{
+              backgroundColor: '#25D366',
+              boxShadow: '0 8px 30px rgba(37, 211, 102, 0.35), 0 0 15px rgba(37, 211, 102, 0.2)'
+            }}
+          >
+            <MessageCircle className="h-7 w-7 transition-transform group-hover:scale-110 sm:h-9 sm:w-9" />
+            RESERVAR NO WHATSAPP
+          </a>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-2 text-center text-xs text-gray-400 sm:text-sm"
+        >
+          Estamos prontos para receber você!
+        </motion.p>
+      </div>
+    </div>
+  )
+}
+
+export default Reserva

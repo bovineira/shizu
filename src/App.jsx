@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Cardapio from './pages/Cardapio'
 import Linktree from './pages/Linktree'
 import Qrcode from './pages/Qrcode'
+import Reserva from './pages/Reserva'
 import './index.css'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Route path="/cardapio" element={<Cardapio />} />
       <Route path="/linktree" element={<Linktree />} />
       <Route path="/qrcode" element={<Qrcode />} />
+      <Route path="/reserva" element={<Reserva />} />
     </Routes>
   )
 }
