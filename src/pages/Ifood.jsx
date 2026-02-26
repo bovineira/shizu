@@ -2,34 +2,8 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ShoppingBag } from 'lucide-react'
 
-const IFOOD_WEB_URL = 'https://www.ifood.com.br/delivery/salvador-ba/shizu-restaurante-rio-vermelho/58767f4d-9946-438a-85b8-172a48be9704?utm_medium=share'
-
-// Path do restaurante para deep link no app (mesmo path da URL web)
-const IFOOD_APP_PATH = 'delivery/salvador-ba/shizu-restaurante-rio-vermelho/58767f4d-9946-438a-85b8-172a48be9704?utm_medium=share'
-
-function isMobile() {
-  if (typeof navigator === 'undefined') return false
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-}
-
-function isAndroid() {
-  return typeof navigator !== 'undefined' && /Android/i.test(navigator.userAgent)
-}
-
-function isIOS() {
-  return typeof navigator !== 'undefined' && /iPhone|iPad|iPod/i.test(navigator.userAgent)
-}
-
-function getIfoodAppLink() {
-  if (isAndroid()) {
-    const fallback = encodeURIComponent(IFOOD_WEB_URL)
-    return `intent://${IFOOD_APP_PATH}#Intent;package=br.com.brainweb.ifood;scheme=ifood;S.browser_fallback_url=${fallback};end;`
-  }
-  if (isIOS()) {
-    return `ifood://${IFOOD_APP_PATH}`
-  }
-  return IFOOD_WEB_URL
-}
+// Link oficial do restaurante Shizü no iFood. No celular, o sistema pode abrir direto no app (Universal Links / App Links).
+const IFOOD_URL = 'https://www.ifood.com.br/delivery/salvador-ba/shizu-restaurante-rio-vermelho/58767f4d-9946-438a-85b8-172a48be9704?utm_medium=share'
 
 function Ifood() {
   const [shake, setShake] = useState(false)
@@ -126,23 +100,16 @@ function Ifood() {
           className="mt-4 w-full max-w-md px-4"
         >
           <a
-            href={isMobile() ? getIfoodAppLink() : IFOOD_WEB_URL}
-            target={isMobile() ? '_self' : '_blank'}
+            href={IFOOD_URL}
+            target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => {
+            onClick={() => {
               if (window.fbq) {
                 window.fbq('track', 'Subscribe', {
                   content_name: 'Shizü - Pedir no iFood',
                   value: 0,
                   currency: 'BRL'
                 })
-              }
-              if (isIOS()) {
-                e.preventDefault()
-                window.location.href = getIfoodAppLink()
-                setTimeout(() => {
-                  window.location.href = IFOOD_WEB_URL
-                }, 2000)
               }
             }}
             className={`sheen-effect group relative flex w-full items-center justify-center gap-3 rounded-full bg-neon-red px-8 py-5 font-bebas text-2xl font-bold uppercase tracking-wide text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-neon-red/50 sm:py-6 sm:text-3xl md:text-4xl ${
